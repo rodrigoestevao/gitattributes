@@ -1,0 +1,101 @@
+###############################
+# Git Line Endings            #
+###############################
+
+# Auto-detect text files and normalize line endings to LF on commit
+* text=auto
+
+# Force batch scripts to always use CRLF line endings.
+*.{cmd,[cC][mM][dD]} text eol=crlf
+*.{bat,[bB][aA][tT]} text eol=crlf
+*.{ps1,[pP][sS]1}    text eol=crlf
+
+# Force iCalendar files to CRLF (often edited on Windows).
+*.{ics,[iI][cC][sS]} text eol=crlf
+
+# Force LF line endings for cross-platform scripts and source files
+*.{sh,ksh,csh,bash,zsh} text eol=lf
+*.{py,pyw,pyx,pyz,pxd}  text eol=lf diff=python
+*.{php,inc}             text eol=lf diff=php
+*.{pl,pm,t}             text eol=lf diff=perl
+*.{css,scss,sass,less}  text eol=lf diff=css
+*.{js,jsx,mjs,cjs}      text eol=lf diff=javascript
+*.{ts,tsx}              text eol=lf diff=typescript
+*.{java}                text eol=lf diff=java
+*.{c,h}                 text eol=lf diff=c
+*.{cpp,cc,cxx,hpp,hxx}  text eol=lf diff=cpp
+*.{html,htm,xhtml}      text eol=lf diff=html
+*.{xml,svg}             text eol=lf diff=xml
+*.{json,jsonl}          text eol=lf diff=json
+*.{yml,yaml}            text eol=lf diff=yaml
+*.{toml}                text eol=lf diff=toml
+*.{graphql,gql}         text eol=lf diff=graphql
+*.{sql}                 text eol=lf diff=sql
+*.{md,mdx,markdown}     text eol=lf diff=markdown
+*.{txt,conf,ini,cfg}    text eol=lf
+*.ipynb                 text eol=lf diff=python
+.htaccess               text eol=lf
+
+# Angular-specific files
+*.{component,service,pipe,guard,directive,module}.{ts,html,css,scss} text eol=lf diff=typescript
+
+# Vue-specific files
+*.vue                   text eol=lf diff=vue
+
+# React-specific files (already partially covered by .jsx/.tsx, but added for clarity)
+*.{jsx,tsx}             text eol=lf diff=javascript
+
+###############################
+# Documents                   #
+###############################
+
+# Treat document files as text for diffing where possible
+*.{doc,docx,dot,rtf,xls,xlsx} diff=astextplain
+*.{tex,TEX}                   diff=text
+*.{pdf,PDF}                   binary
+
+###############################
+# Binary Files                #
+###############################
+
+# Mark files as binary (no text conversion, no diff)
+*.{7z,gz,zip,tar,tar.gz,tgz}            binary
+*.{db,sqlite,sqlite3}                   binary
+*.{exe,dll,so,bin}                      binary
+*.{fla,flv,swf}                         binary
+*.{gif,jpeg,jpg,png,webp,avif,ico,bmp}  binary
+*.{mp3,mp4,mov,avi,mkv,webm}            binary
+*.{ttf,otf,eot,woff,woff2}              binary
+*.{psd}                                 binary
+*.{pyc,pyo,pyd}                         binary
+*.{pkl,pickle,parq,parquet,fea,feather} binary
+
+###############################
+# Git LFS (Large File Storage)#
+###############################
+
+# Track large binary files with Git LFS
+*.{7z,gz,zip,tar,tar.gz,tgz}            filter=lfs diff=lfs merge=lfs -text
+*.{db,sqlite,sqlite3}                   filter=lfs diff=lfs merge=lfs -text
+*.{exe,dll,so,bin}                      filter=lfs diff=lfs merge=lfs -text
+*.{fla,flv,swf}                         filter=lfs diff=lfs merge=lfs -text
+*.{gif,jpeg,jpg,png,webp,avif,ico,bmp}  filter=lfs diff=lfs merge=lfs -text
+*.{mp3,mp4,mov,avi,mkv,webm}            filter=lfs diff=lfs merge=lfs -text
+*.{ttf,otf,eot,woff,woff2}              filter=lfs diff=lfs merge=lfs -text
+*.{psd}                                 filter=lfs diff=lfs merge=lfs -text
+*.{pkl,pickle,parq,parquet,fea,feather} filter=lfs diff=lfs merge=lfs -text
+
+###############################
+# Generated Files             #
+###############################
+
+# Exclude generated files from GitHub language stats
+*.{min.js,min.css}                                       linguist-generated
+{package-lock.json,poetry.lock,yarn.lock,pnpm-lock.yaml} linguist-vendored
+
+# Use 'ours' merge strategy for lock files and disable diff
+{package-lock.json,poetry.lock,yarn.lock,pnpm-lock.yaml} merge=ours -diff
+
+# Optionally treat large Jupyter notebooks as generated or use LFS
+*.ipynb linguist-generated
+# *.ipynb filter=lfs diff=lfs merge=lfs -text  # Uncomment if large notebooks are common
